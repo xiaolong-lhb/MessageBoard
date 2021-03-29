@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- CSS引入 -->
+<style>
+  h2{
+    text-align: center;
+  }
+  div{
+      font-size: 25px;
+      text-align: center;
+      margin-top: 80px;
+  }
+</style>
+
+<body>
+    <!-- 显示界面 -->
+    <h2>欢迎访问问道留言系统</h2>
+    <div>
+        英文名：<input type="text" name="username"><br>
+        密&nbsp;&nbsp;  码：<input type="password" name="psw"><br>
+        <button style="color: blue;"id="sub">登录</button>
+        <input style="margin-left: 80px;" type="reset" value="取消">
+    </div>
+    <p style="text-align: center;">没有用户名，请点击<a href="/register">注册</a></p>
+</body>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!-- <script src="./doLogin.js" type="text/javascript"></script> -->
+<script type="text/javascript">
+        var logbtn=document.getElementById("sub");
+        logbtn.onclick=function(){
+          axios.post('/doLogin',{
+            'username':document.getElementsByName('username')[0].value,
+            'psw':document.getElementsByName('psw')[0].value
+          }).then(res=>{
+            if(res.data[0].status)
+            {
+              alert(res.data[0].msg);
+              window.location.href='/MsgMain';
+            }
+            else{
+              alert(res.data[0].msg);
+              window.location.href='/';
+            }           
+          }).catch(error=>{
+            console.log(error);
+          })
+        }
+
+  </script>
+</html>

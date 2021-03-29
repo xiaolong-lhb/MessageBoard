@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<body>
+    <table id="table1"> 
+    </table>
+    <script>
+        //获取后端传过来的数据并渲染到html页面上
+        axios.get('./doMsg').then(res=>{
+        var table1=document.getElementById("table1");
+        var g_content=res.data;
+            //创建元素，将后端中获取到的值显示出来
+        for(var i=0;i<g_content.length;i++){
+            var tr1=document.createElement("tr");
+            var tr2=document.createElement("tr");
+            var tr3=document.createElement("tr");
+            var td1=document.createElement("td");
+            var td2=document.createElement("td");
+            var hr=document.createElement("hr");
+            tr1.appendChild(td1);
+            tr1.appendChild(td2);
+            //将获取到的数组值依次赋值到标签中
+            td1.innerHTML=g_content[i].username;
+            td2.innerHTML=g_content[i].createtime;
+            tr2.innerHTML=g_content[i].title;
+            tr3.innerHTML=g_content[i].content;
+            table1.appendChild(tr1);
+            table1.appendChild(tr2);
+            table1.appendChild(tr3);
+            table1.appendChild(hr);
+        
+        } 
+        })
+</script>
+</body>
+</html>
